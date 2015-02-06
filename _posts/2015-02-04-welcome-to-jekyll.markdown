@@ -9,6 +9,27 @@ categories: jekyll update
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
+There are lists, too!
+
+<ul>
+	<li>I am unordered list item</li>
+	<li>I am unordered list item</li>
+	<li>I am unordered list item</li>
+</ul>
+
+<ol>
+	<li>I am first list item</li>
+	<li>I am the second...</li>
+	<li>And I am last, third element</li>
+</ol>
+
+<blockquote>
+	<p>
+    Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
+  </p>
+  <footer><cite title="Antoine de Saint-Exupéry">Antoine de Saint-Exupéry</cite></footer>
+</blockquote>
+
 <h3>Heading H3</h3>
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
