@@ -1,0 +1,16 @@
+//
+// Responsive container
+// wraps content in page areas like header, footer, main content
+
+// Small devices - screen width is less than optimal readability width
+// No need to set container width
+.container {
+  margin: 0 1em;
+}
+
+@include media-query(map-get($device-breakpoints, sm)) {
+  .container {
+    width: $optimal-readability-width;
+    margin: 0 auto;
+  }
+}

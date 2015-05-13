@@ -30,6 +30,19 @@ There are lists, too!
   <footer><cite title="Antoine de Saint-Exupéry">Antoine de Saint-Exupéry</cite></footer>
 </blockquote>
 
+There is also syntax highlighting!
+
+{% highlight css %}
+  .person {
+    color: black;
+    transition: all .5s ease-in-out;
+  }
+  .person__hand {}
+  .person--female {}
+  .person--female__hand {}
+  .person__hand--left {}
+{% endhighlight %}
+
 <h3>Heading H3</h3>
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.

@@ -1,14 +1,22 @@
-/* Colors */
+//
+// Colors
 
 $light-black: #222222;
 $gray: #7A7A7A;
+$light-gray: #CCCCCC;
 $pink: #FF4D4D;
 
 $text-color: $light-black;
 $main-color: $pink;
 
+//
+// Typography
 
-/* Device breakpoints */
+$optimal-readability-width: 65ch;
+
+
+//
+// Device breakpoints
 
 //xs: 20em - 320px
 //sm: 48em - 768px
@@ -16,10 +24,34 @@ $main-color: $pink;
 //lg: 68.75em - 1100px
 //xl: 81.25em - 1300px
 
-$breakpoints: (
+$device-breakpoints: (
   xs:   20em,
   sm:   48em,
   md:   56.25em,
   lg:   68.75em,
   xl: 	81.25em
 );
+
+
+//
+// Transitions
+
+$transition-time-base: 0.2s;
+
+//
+// Layout
+
+$site-surround-border-color: $light-gray;
+$site-surround-text-color: $gray;
+$site-surround-hover-color: $main-color;
+
+
+//
+// Social icons
+
+$social-icon-dim: 4em;
+
+//
+// Post
+
+$post-metadata-color: $gray;

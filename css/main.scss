@@ -7,7 +7,6 @@
 @import
 	"utils/variables",
 	"utils/mixins",
-        "utils/functions",
 
         "utils/typesettings/typesettings-variables",
         "utils/typesettings/typesettings-mixins",
@@ -15,12 +14,14 @@
 
         "base/reset",
         "base/typesettings",
+        "base/syntax-highlighting",
 
-        "components/blockquotes",
+        "components/container",
         "components/buttons",
-        "components/headings",
         "components/links",
+        "components/social-icons",
 
+        "layout/layout",
         "layout/footer",
         "layout/header",
 

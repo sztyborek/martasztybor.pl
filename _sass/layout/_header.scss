@@ -1,7 +1,11 @@
 .site-header {
-	margin: 20px 0;
-	text-align: center;
-	border-bottom: 1px solid #ccc;
+  @extend %site-surround;
+  border-bottom: 1px solid $site-surround-border-color;
+  margin-bottom: 2em;
+
+  @include media-query(map-get($device-breakpoints, sm)) {
+    margin-bottom: 3em;
+  }
 }
 
 .site-nav, .site-title {

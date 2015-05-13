@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1 0 auto;
+}
+
+%site-surround {
+  font-family: $font-sans;
+  padding: 1em 0;
+  text-align: center;
+
+  a {
+    color: $site-surround-text-color;
+
+    &:hover {
+      color: $site-surround-hover-color;
+
+      svg {
+        fill: $site-surround-hover-color;
+      }
+    }
+  }
+}

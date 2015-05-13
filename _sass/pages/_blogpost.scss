@@ -1,6 +1,20 @@
-//move to layout please...
+.post-header {
+  margin-bottom: 1em;
+}
 
-.page-content {
-	max-width: 50em;
-	margin: 0 auto;
+.post-list {
+  list-style-type: none;
+  margin: 0;
+}
+
+.post-link {
+  color: inherit;
+
+  &:hover {
+    color: $main-color;
+  }
+}
+
+.post-meta {
+  color: $post-metadata-color;
 }

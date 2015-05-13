@@ -1,0 +1,37 @@
+.social-icon {
+  display: inline-block;
+  margin: 0 1em;
+}
+
+.social-icon-name,
+.social-icon-img {
+  display: block;
+}
+
+.social-icon-name {
+  @include transition(all, $transition-time-base, ease-in-out);
+}
+
+.social-icon-img {
+  display: inline-block;
+
+  > svg {
+    width: $social-icon-dim;
+    height: $social-icon-dim;
+    fill: $gray;
+    @include transition(all, $transition-time-base, ease-in-out);
+  }
+}
+
+.social-icon-img--rss {
+  line-height: 3em;
+  vertical-align: middle;
+
+  > svg {
+    height: 2.5em;
+  }
+}
+
+.social-icon-credits {
+  display: none !important;
+}
