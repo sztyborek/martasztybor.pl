@@ -5,6 +5,7 @@ body {
 }
 
 .site-content {
+  @extend %container;
   flex: 1 0 auto;
 }
 

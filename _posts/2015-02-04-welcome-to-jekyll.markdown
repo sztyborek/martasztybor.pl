@@ -37,10 +37,43 @@ There is also syntax highlighting!
     color: black;
     transition: all .5s ease-in-out;
   }
+
   .person__hand {}
   .person--female {}
   .person--female__hand {}
   .person__hand--left {}
+
+  // Some comment
+
+  /* Some block level comment */
+
+  angular
+    .module('ets')
+    .directive('collapse', collapse);
+
+  collapse.$inject = [];
+
+  function collapse() {
+    return {
+      scope: {
+        collapse: '='
+      },
+      link: ($scope, element) => {
+        $scope.$watch('collapse', (shouldCollapse) => {
+          if (shouldCollapse) {
+            element.collapse('show');
+          } else {
+            element.collapse('hide');
+          }
+        });
+      }
+    };
+  }
+
+  <article aria-hidden="true">
+    Lorem ipsum
+  </article>
+
 {% endhighlight %}
 
 <h3>Heading H3</h3>
