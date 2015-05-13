@@ -2,4 +2,5 @@
   @extend %site-surround;
   @include clearfix;
   border-top: 1px solid $site-surround-border-color;
+  text-align: center;
 }

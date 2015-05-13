@@ -3,6 +3,7 @@
   border-bottom: 1px solid $site-surround-border-color;
   margin-bottom: 2em;
 
+  @include clearfix;
   @include media-query(map-get($device-breakpoints, sm)) {
     margin-bottom: 3em;
   }
@@ -10,4 +11,40 @@
 
 .site-nav, .site-title {
 	display: inline-block;
+}
+
+.site-title {
+	> svg {
+		display: inline-block;
+		vertical-align: middle;
+		fill: $light-gray;
+		@include transition(all, $transition-time-base, ease-in-out);
+
+		position: relative;
+		top: 3px;
+	}
+}
+
+.site-nav {
+	float: right;
+}
+
+.site-link {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 1.5em;
+}
+
+.site-rss-link {
+	@extend .site-link;
+
+	> svg {
+		width: 1em;
+		height: 1em;
+		fill: $site-surround-text-color;
+		@include transition(all, $transition-time-base, ease-in-out);
+
+		position: relative;
+  		top: 2px;
+	}
 }

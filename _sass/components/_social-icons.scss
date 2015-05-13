@@ -18,16 +18,8 @@
   > svg {
     width: $social-icon-dim;
     height: $social-icon-dim;
-    fill: $gray;
+    fill: $site-surround-text-color;
     @include transition(all, $transition-time-base, ease-in-out);
-  }
-}
-
-.social-icon-img--rss {
-  line-height: 3em;
-
-  > svg {
-    height: 1.5em;
   }
 }
 
