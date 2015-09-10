@@ -46,7 +46,7 @@ $transition-time-base: 0.2s;
 //
 // Layout
 
-$site-surround-border-color: $light-gray;
+$site-surround-border-color: lighten($light-gray, 12%);
 $site-surround-text-color: $gray;
 $site-surround-hover-color: $main-color;
 

@@ -15,13 +15,12 @@
 
 .site-title {
 	> svg {
+		width: 1.3em;
+    	height: 1.3em;
 		display: inline-block;
 		vertical-align: middle;
-		fill: $light-gray;
+		fill: $gray;
 		@include transition(all, $transition-time-base, ease-in-out);
-
-		position: relative;
-		top: 3px;
 	}
 }
 
