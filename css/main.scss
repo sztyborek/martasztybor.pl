@@ -5,10 +5,17 @@
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
-	"utils/variables",
-	"utils/mixins",
-
         "base/reset",
+
+	"utils/variables",
+        "utils/typeplate-vars",
+	"utils/mixins",
+        "utils/typeplate-mixins",
+        "utils/typeplate-functions",
+        "utils/typeplate-extends",
+        "utils/typeplate-helpers",
+        
+        "base/typeplate-styles",
 
         "fonts/fonts",
 
@@ -20,6 +27,7 @@
         "layout/layout",
         "layout/footer",
         "layout/header",
+        "layout/menu",
 
         "pages/landing",
         "pages/blogpost"

@@ -1,7 +1,8 @@
 .landing-header {
-	
+	@extend .typl8-tera;
+	line-height: 1.1;
 }
 
-.landing-title {
-	
+.landing-emph {
+	color: $pink;
 }

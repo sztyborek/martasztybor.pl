@@ -29,6 +29,7 @@ body {
 
 p {
   margin: auto auto $typl8-indent-val;
+  line-height: $typl8-line-height;
   @if $typl8-paragraph-spacing == false {
     & + p {
       text-indent: $typl8-indent-val;

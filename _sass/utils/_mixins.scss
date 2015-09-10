@@ -20,11 +20,11 @@
 }
 
 @mixin box-shadow($left:0, $top:2px, $blur:2px, $color:#000, $inset:"") {
-    -webkit-box-shadow:$left $top $blur $color #{$inset};
-    -moz-box-shadow:$left $top $blur $color #{$inset};
-    -ms-box-shadow:$left $top $blur $color #{$inset};
-    -o-box-shadow:$left $top $blur $color #{$inset};
-    box-shadow:$left $top $blur $color #{$inset};
+  -webkit-box-shadow:$left $top $blur $color #{$inset};
+  -moz-box-shadow:$left $top $blur $color #{$inset};
+  -ms-box-shadow:$left $top $blur $color #{$inset};
+  -o-box-shadow:$left $top $blur $color #{$inset};
+  box-shadow:$left $top $blur $color #{$inset};
 }
 
 @mixin clearfix {
@@ -33,4 +33,16 @@
     display: table;
     clear: both;
   }
+}
+
+@mixin transform($transforms) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
 }
