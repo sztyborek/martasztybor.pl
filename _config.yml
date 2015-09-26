@@ -1,5 +1,6 @@
 # Site settings
-title: Marta Sztybor @ Frontend dev's thoughts
+author: Marta Sztybor
+title: I do front-end stuff
 email: hello@martasztybor.pl
 description: "My personal blog, where I am focusing mostly on CSS"
 baseurl: "" # the subpath of your site, e.g. /blog/
@@ -13,13 +14,13 @@ google_verification:
 # Optional features
 animated:             true
 show_related_posts:   false
-show_post_footers:    true
+show_post_footers:    false
 show_social_icons:    true
 ajaxify_contact_form: false
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname:
+disqus_shortname: martasztybor
 
 # Social icons
 github_username: sztyborek
@@ -35,13 +36,13 @@ paypal_url:
 flattr_button:
 
 # Post sharing icons
-show_sharing_icons: false
-share_text: 'Share this post!'
+show_sharing_icons: true
+share_text: 'Like it? Share it!'
 # Change to 'true' to enable individual icons
-share_facebook: false
-share_twitter: false
-share_googleplus: false
-share_linkedin: false
+share_facebook: true
+share_twitter: true
+share_googleplus: true
+share_linkedin: true
 share_digg: false
 share_tumblr: false
 share_reddit: false
