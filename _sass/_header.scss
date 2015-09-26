@@ -69,10 +69,10 @@
 .posts .post a .post-meta,
 .posts .post a .post-title,
 .posts .post a .post-summary {
-  -webkit-transition: color .3s ease-in-out;
-  -moz-transition: color .3s ease-in-out;
-  -o-transition: color .3s ease-in-out;
-  transition: color .3s ease-in-out;
+  -webkit-transition: opacity .3s ease-in-out;
+  -moz-transition: opacity .3s ease-in-out;
+  -o-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
 }
 
 .site-header a:hover,
