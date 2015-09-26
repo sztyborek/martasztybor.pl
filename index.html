@@ -4,20 +4,55 @@ layout: default
 
 <div class="home">
 
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
+  <div class="posts">
+    {% for post in paginator.posts %}
+      <div class="post py3">
+        <p class="post-meta">{{ post.date | date: site.date_format }}</p>
+        <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+        <p class="post-summary">
+          {% if post.summary %}
+            {{ post.summary }}
+          {% else %}
+            {{ post.excerpt }}
+          {% endif %}
+        </p>
+      </div>
     {% endfor %}
-  </ul>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    <div class="post py3">
+      <p class="post-meta">Sep 10, 2015</p>
+      <a href="http://10clouds.com/blog/why-you-misuse-bootstrap-and-why-you-should-stop-doing-this/" target="_blank" class="post-link">
+        <h3 class="h1 post-title">
+          Why You Misuse Bootstrap and Why You Should Stop Doing This
+        </h3>
+      </a>
+      <p class="post-summary">
 
+      </p>
+    </div>
+
+    <div class="post py3">
+      <p class="post-meta">May 26, 2015</p>
+      <a href="http://10clouds.com/blog/5-lessons-learned-at-the-front-trends-2015-conference/" target="_blank" class="post-link">
+        <h3 class="h1 post-title">
+          5 Lessons Learned at the Front-Trends 2015 Conference
+        </h3>
+      </a>
+      <p class="post-summary">
+        
+      </p>
+    </div>
+
+    <div class="post py3">
+      <p class="post-meta">Apr 21, 2015</p>
+      <a href="http://10clouds.com/blog/6-steps-to-make-your-css-code-more-maintainable/" target="_blank" class="post-link">
+        <h3 class="h1 post-title">
+          6 Steps to Make your CSS Code More Maintainable
+        </h3>
+      </a>
+      <p class="post-summary">
+        
+      </p>
+    </div> 
+  </div>
 </div>
