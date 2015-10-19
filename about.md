@@ -6,8 +6,8 @@ permalink: /about/
 
 I'd like to share a bunch of insights about my work here. Every day I'm digging into the client side code of webapps. So, it's fair to say that I'm quite familiar with stuff like HTML, CSS and JS. I'm particularly interested in:
 <ul>
-	<li>CSS tooling (Postprocessors for the win! But SASS is also welcome)</li>
-	<li>Writing scalable and maintainable stylesheets while remaining sane</li>
+	<li>CSS tooling (Sass, PostCSS)</li>
+	<li>Writing scalable and maintainable stylesheets</li>
 	<li>Web typography</li>
 </ul>
 
