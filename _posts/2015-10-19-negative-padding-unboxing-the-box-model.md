@@ -2,7 +2,7 @@
 layout:     post
 title:      Negative Padding&#58; Unboxing the Box Model
 date:       2015-10-19 20:00:00
-summary:    Lorem ipsum
+summary:    This post is inspired with a discussion we had recently at our workplace. It started with a question, asked by one of the backend developers&#58; "Why do we have negative margin in CSS, while there's no possibility to set negative padding?". I like such "out of the box" questions, so I'll try to break down a problem and take a closer look of the box model.
 categories: CSS
 image: /img/pack.jpg
 ---

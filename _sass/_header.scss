@@ -12,11 +12,13 @@
 .site-title {
   display: inline-block;
   vertical-align: middle;
+  float: left;
 }
 
 .site-nav {
   display: inline-block;
   vertical-align: middle;
+  float: right;
 }
 
 .site-header nav a {
