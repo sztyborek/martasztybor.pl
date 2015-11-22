@@ -17,7 +17,7 @@ layout: default
         {% if post.external_page %}
           <a href="{{ post.external_page_link }}" target="_blank" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
         {% else %}
-          <a href="{{ post.url | prepend: site.baseurl }}" target="_blank" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
         {% endif %}
         <p class="post-featured-image">
           <img src="{{ post.image | prepend: site.baseurl }}" alt="Featured image" />

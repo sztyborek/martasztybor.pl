@@ -30,7 +30,25 @@ Box model properties are essential for the browser to determine (during layout/r
 
 ##Understanding negative margin
 
-Despite its hackish reputation, negative margin is perfectly valid CSS (although it may be limited depending on the browser).
+Despite its hackish reputation, negative margin is allowed by the specification (although it may be limited depending on the browser - now it should be supported by all major browsers. Times of IE6, I think, are long gone).
+
+Like I mentioned above, margins are used to create spacing between elements. To add any whitespace then, the margin value must be more than zero (zero margin value means no whitespace between elements). So, what would happen if we set the value to less than zero? Probably it would cause elements overlapping. Let's see how the elements with negative margin set behave.
+
+### Different scenarios
+
+For every static positioned element (with no float or absolute positioning applied):
+
+- When **top or left** margin is set to negative value, it pulls the element _and_ the following elements up.
+- When **bottom or right** margin is set to negative, it pulls the following elements up
+
+Margin collapsing? Add some visualization
+
+### Use cases
+
+- Vertical centering of an element (this is one of several techniques)
+- Intentional elements overlapping, when you understand the consequences of negative margin
+
+### Difference between negative margin and relative positioning
 
 ##Why we don't have negative padding then?
 
