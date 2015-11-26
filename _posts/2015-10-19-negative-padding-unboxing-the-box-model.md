@@ -7,7 +7,7 @@ categories: CSS
 image: /img/pack.jpg
 ---
 
-This post is inspired with a discussion we had recently at our workplace. It started with a question, asked by one of the backend developers:
+This post is inspired with a discussion we had once at [our workplace](http://10clouds.com). It started with a question, asked by one of the backend developers:
 
 > Why do we have negative margin in CSS, while there's no possibility to set negative padding?
 
@@ -19,26 +19,36 @@ The first thing which comes to mind is probably: "Because negative padding makes
 
 Here is the box model's visual representation:
 
-// Illustration
+<figure>
+	<figcaption>CSS Box Model</figcaption>
+</figure>
 
-Every box has its content area, which optionally can be surrounded by padding, border and margin area. Each of them has different purposes. For this article purposes, let's focus on the padding and the margin:
+Every box has its content area, which optionally can be surrounded by padding, border and margin area. Each of them has different purposes. Let's focus on the padding and the margin:
 
-- Padding pushes away the border from the content. It makes the space around the content. When it's set to zero, the padding edge is the same as the content edge.
+- Padding pushes away the border from the content, so it makes the space around the content. When it's set to zero, the padding edge is the same as the content edge.
 - Margin pushes away the content from any other existing boxes. It is used to make the horizontal and vertical space between elements. When margin is set to zero, it means that the margin edge is the same as the border edge.
 
-There are [several differences](http://www.impressivewebs.com/difference-block-inline-css/) between setting the box model properties for block level and inline level elements.
+It's possible to set box model values by setting corresponding CSS properties (for example, to apply element's dimensions, use `width` and `height`, and `padding` to set padding width). You must keep in mind that there are [several differences](http://www.impressivewebs.com/difference-block-inline-css/) between setting the box model properties for block level and inline level elements.
 
-Box model properties are essential for the browser to determine (during layout/reflow mechanism) the coordinates of the element and the space that it occupies on the page.
+Box model properties are essential for the browser to determine the coordinates of the element and the space that it occupies on the page ([here is more detailed information about how browsers work](http://www.html5rocks.com/en/tutorials/internals/howbrowserswork)). Browser uses a coordinate system with `(0,0)` point placed in the top left corner of the viewport (the visible part of the browser window, the `html` element). Elements' positions are measured in pixels with positive `x` direction going to the right and positive `y` direction to the bottom.
+
+<figure>
+	<figcaption>Coordinate system of the browser</figcaption>
+</figure>
 
 ##Understanding negative margin
 
 Despite its "hackish" reputation, negative margin [is allowed by the specification](http://www.w3.org/TR/CSS21/box.html#margin-properties).
 
-Like I mentioned above, margins are used to create spacing between elements. To add any whitespace then, the margin value must be more than zero (zero margin value means no whitespace between elements). So, what would happen if we set the value to less than zero? Probably it would cause elements overlapping. Let's see how the elements with negative margin set behave.
+Like I mentioned above, margins are used to create spacing between elements. To add any whitespace then, the margin value must be more than zero. So, what would happen if we set the value to less than zero? Probably it would cause elements overlapping. Let's see how the elements with negative margin set behave.
 
-// Illustration
+<figure>
+	<figcaption></figcaption>
+</figure>
 
 For every static positioned element (with no float or absolute positioning applied):
+
+(Cases: element positioned statically, relatively, absolutely - or fixed, applied float)
 
 - When **top or left** margin is set to negative value, it pulls the element _and_ the following elements up.
 - When **bottom or right** margin is set to negative, it pulls the following elements up
@@ -50,16 +60,22 @@ Applying `position: relative` makes an element to shift its position relatively 
 - The element's original position remains in the flow of the document. So, if we apply for example `top: -20px`, the element will be shifted upwards, but its original space will remain and other elements will _not_ be shifted.
 - For an element with `position: relative` the `z-index` property will work.
 
-// Illustration
+<figure>
+	<figcaption>Visualization of the difference between relative positioning and negative margin</figcaption>
+</figure>
 
-### Use cases
+### Use cases of negative margin
 
 - Vertical centering of an element (this is one of [several techniques](https://css-tricks.com/centering-css-complete-guide/))
 - Intentional elements overlapping, when you understand the consequences of negative margin
+- In grid systems, for grid container. Grid container has negative left and right margin to override grid gutter paddings.
 
 ##Why we don't have negative padding then?
 
 The word "padding" refers to something inner. That's because the idea of negative padding may appear counterintuitive. Element with negative padding would be like something with an inside-out lining.
+
+
+These are my assumptions...
 
 Let's have a `<p>` element with some text content, padding and border:
 
