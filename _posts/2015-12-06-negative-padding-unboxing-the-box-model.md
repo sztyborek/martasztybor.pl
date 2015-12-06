@@ -160,7 +160,7 @@ The word ["padding"](http://www.collinsdictionary.com/dictionary/american/paddin
 
 Imagine that setting negative padding values is possible. When padding value is set to zero, the border edge is the same as the content edge. When we set it negative, then border will overlap the content. Maybe that would be useful but, hey, content extended beyond its boundaries? That would make calculations of the element dimensions and position on the page definitely troublesome.
 
-###Hypothetical behavior of negative margin
+###Hypothetical behavior of negative padding
 
 Let's have a `<p>` element with some text content, padding and border:
 
