@@ -2,7 +2,7 @@
 layout:     post
 title:      Negative Padding&#58; Unboxing the Box Model
 date:       2015-10-19 20:00:00
-summary:    This post is inspired with a discussion we had recently at our workplace. It started with a question, asked by one of the backend developers&#58; "Why do we have negative margin in CSS, while there's no possibility to set negative padding?". I like such "out of the box" questions, so I'll try to break down a problem and take a closer look of the box model.
+summary:    This post is inspired with a discussion we had recently at our workplace. It started with a question, asked by one of the backend developers&#58; "Why do we have negative margin in CSS, while there's no possibility to set negative padding?". I like such "out of the box" questions, so I'll try to break down the problem and take a closer look of the box model.
 categories: CSS
 image: /img/pack.jpg
 ---
@@ -11,7 +11,7 @@ This post is inspired with a discussion we had once at [our workplace](http://10
 
 > Why do we have negative margin in CSS, while there's no possibility to set negative padding?
 
-The first thing which comes to mind is probably: "Because negative padding makes no sense!". It's not a complete answer though. I like such "out of the box" (pun intended) questions, so I'll try to break down a problem and take a closer look of the box model. The spec defines it as it goes:
+The first thing which comes to mind is probably: "Because negative padding makes no sense!". It's not a complete answer though. I like such "out of the box" (pun intended) questions, so I'll try to break down the problem and take a closer look of the box model. The spec defines it as it goes:
 
 > The CSS [box model](http://www.w3.org/TR/CSS21/box.html) describes the rectangular boxes that are generated for elements in the document tree and laid out according to the [visual formatting model](http://www.w3.org/TR/CSS21/visuren.html).
 >
@@ -40,19 +40,18 @@ Box model properties are essential for the browser to determine the coordinates 
 
 Despite its "hackish" reputation negative margin [is allowed by the specification](http://www.w3.org/TR/CSS21/box.html#margin-properties). If applied with care and deep understanding, they produce valid code.
 
-Like I mentioned above margins are used to create spacing between elements. To add any whitespace the margin value must be more than zero. Therefore, if we set negative margin value, it will cause elements to overlap. Let's see how the elements with negative margin set behave.
-
-<pre class="codepen" data-height="470" data-type="result" data-href="GoROMY" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/GoROMY">Check out this Pen!</a></pre>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
+Like I mentioned above margins are used to create spacing between elements. To add any whitespace the margin value must be more than zero. Therefore, if we set negative margin value, it will cause elements to overlap. Let's see how the elements with negative margin set behave:
 
 <figure>
+  <pre class="codepen" data-height="470" data-type="result" data-href="GoROMY" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/GoROMY">Check out this Pen!</a></pre>
+  <script async src="http://codepen.io/assets/embed/ei.js"></script>
 	<figcaption>Visualization: adjacent elements with positive top margin value applied to the second one (left) and negative top margin value (right) - the second element overlaps the first one</figcaption>
 </figure>
 
 For every element with `position: static` (which is the default `position` property value) and no `float` applied:
 
 - When **top or left** margin is set to negative value, it pulls the element **and** the following elements up or left.
-- When **bottom or right** margin is set to negative, it pulls the following elements up or left.
+- When **bottom or right** margin is set to negative, it pulls only the following elements up or left.
 
 Every elment with `position` value other than `static` (which means: `absolute`, `relative` or `fixed`) [creates new stacking context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Stacking_without_z-index). Absolute positioning removes the element from the document flow. In this case the main difference will be **not pulling** the following elements in the direction of negative margin. The same goes for elements with fixed positioning.
 
@@ -62,12 +61,12 @@ Case becomes a little more complex for floated elements. However [the thing can 
 
 Applying `position: relative` makes an element to shift its position relatively to its original position. Having that in mind one may assume that this technique does exactly the same as negative margin. There are two main differences though:
 
-- The element's original position remains in the flow of the document. It means that if we apply, for example `top: -20px`, the element will be shifted upwards but its original space will remain and other elements will **not** be shifted.
-- For an element with `position: relative` the `z-index` property will work. This difference concerns only elements with `position: static`. You must keep in mind that [`z-index` works only for positioned elements](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Adding_z-index).
+- The element's original position remains in the flow of the document. It means that if we apply, for example `top: -20px`, the element will be shifted upwards but its original space will remain and the following elements will **not** be shifted.
+- For an element with `position: relative` the `z-index` property will work. You must keep in mind that [`z-index` works only for positioned elements](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Adding_z-index).
 
-<pre class="codepen" data-height="470" data-type="result" data-href="zrYLpN" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/zrYLpN">Check out this Pen!</a></pre>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
 <figure>
+  <pre class="codepen" data-height="470" data-type="result" data-href="zrYLpN" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/zrYLpN">Check out this Pen!</a></pre>
+  <script async src="http://codepen.io/assets/embed/ei.js"></script>
 	<figcaption>Visualization of the main difference between relative positioning and negative margin</figcaption>
 </figure>
 
@@ -75,7 +74,8 @@ Applying `position: relative` makes an element to shift its position relatively 
 
 Nowadays there are several use cases when negative margin can come in handy:
 
-- Vertical centering of a block element of known height (source: [CSS-Tricks guide for centering](https://css-tricks.com/centering-css-complete-guide/)):
+- Centering a block element of known dimensions (source: [CSS-Tricks guide for centering](https://css-tricks.com/centering-css-complete-guide/)):
+
 {% highlight css %}
 .parent {
   position: relative;
@@ -87,19 +87,25 @@ Nowadays there are several use cases when negative margin can come in handy:
 .child {
   position: absolute;
   top: 50%;
+  left: 50%;
   height: 200px;
+  width: 200px;
   margin-top: -100px; /* Half of the element's height */
+  margin-left: -100px; /* Half of the element's width */
 }
 {% endhighlight %}
 
-<pre class="codepen" data-height="470" data-type="result" data-href="VvRbpN" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/VvRbpN">Check out this Pen!</a></pre>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
+<figure>
+  <pre class="codepen" data-height="470" data-type="result" data-href="ZQEjjp" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/ZQEjjp">Check out this Pen!</a></pre>
+  <script async src="http://codepen.io/assets/embed/ei.js"></script>
+  <figcaption>Centering an element of known width and height</figcaption>
+</figure>
 
 - Implementing design with overlapping elements. This is quite popular use case and negative margin allows you to achieve this effect without breaking the document flow.
 
-<pre class="codepen" data-height="470" data-type="result" data-href="VvRbpN" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/VvRbpN">Check out this Pen!</a></pre>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
 <figure>
+  <pre class="codepen" data-height="470" data-type="result" data-href="QyWVKK" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/QyWVKK">Check out this Pen!</a></pre>
+  <script async src="http://codepen.io/assets/embed/ei.js"></script>
 	<figcaption>Layout with overlapping elements</figcaption>
 </figure>
 
@@ -120,9 +126,9 @@ Nowadays there are several use cases when negative margin can come in handy:
 }
 {% endhighlight %}
 
-<pre class="codepen" data-height="470" data-type="result" data-href="VvRbpN" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/VvRbpN">Check out this Pen!</a></pre>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
 <figure>
+  <pre class="codepen" data-height="470" data-type="result" data-href="LGYJQa" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/LGYJQa">Check out this Pen!</a></pre>
+  <script async src="http://codepen.io/assets/embed/ei.js"></script>
 	<figcaption>Making element fill up whole width of a container with padding applied</figcaption>
 </figure>
 
@@ -150,7 +156,7 @@ I think there are just a few examples of "non-hacky" uses of negative margin. If
 
 ##Why we don't have negative padding then?
 
-The word "padding" refers to something inner. That's because the idea of negative padding may appear counterintuitive. Element with negative padding would be like something with an inside-out lining.
+The word ["padding"](http://dictionary.reference.com/browse/padding?s=t) refers to something inner. That's because the idea of negative padding may appear counterintuitive. Element with negative padding would ]be like something with an inside-out lining.
 
 Imagine that setting negative padding values is possible. When padding value is set to zero, the border edge is the same as the content edge. When we set it negative, then border will overlap the content. Maybe that would be useful but, hey, content extended beyond its boundaries? That would make calculations of the element dimensions and position on the page definitely troublesome.
 
@@ -164,44 +170,64 @@ Let's have a `<p>` element with some text content, padding and border:
 
 {% highlight css %}
 .example {
-  padding: 0 2em;
+  font-size: 16px;
+  padding: 8px 0;
   border: 1px solid blue;
 }
 {% endhighlight %}
 
-This is how would it render in the browser:
+This is how it renders in the browser:
 
-<pre class="codepen" data-height="470" data-type="result" data-href="VvRbpN" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/VvRbpN">Check out this Pen!</a></pre>
-<script async src="http://codepen.io/assets/embed/ei.js"></script>
+<figure>
+  <pre class="codepen" data-height="470" data-type="result" data-href="yeLxjP" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/yeLxjP">Check out this Pen!</a></pre>
+  <script async src="http://codepen.io/assets/embed/ei.js"></script>
+</figure>
 
 For this example purposes, let's assume that it's possible to set the negative padding for an element:
 
 {% highlight css %}
 .example {
-  padding: -2em 0 2em 0;
+  padding: 8px 0 -8px 0;
   border: 1px solid blue;
 }
 {% endhighlight %}
 
-Then the element would probably render like that:
+Then the element would probably be rendered like that:
 
+<figure>
+  <img src="{{ "/img/negative-padding/negative.png" | prepend: site.baseurl }}" alt="Element with negative top padding value" />
+  <figcaption>Element with negative top padding value</figcaption>
+</figure>
 
 The element's bottom would probably be "cut out" by the bottom border. Let's go further with our thought experiment and set to negative value also the top padding:
 
 {% highlight css %}
 .example {
-  padding: 0 -2em;
+  padding: 0 -8px;
   border: 1px solid blue;
 }
 {% endhighlight %}
 
-How the element would be rendered then?
+<figure>
+  <img src="{{ "/img/negative-padding/negative2.png" | prepend: site.baseurl }}" alt="Element with negative top padding value both on top and the bottom" />
+  <figcaption>Element with negative top padding value both on top and the bottom</figcaption>
+</figure>
 
+When the element is rendered, it's essential for the browser to know the exact dimensions of its content. In this case we can assume that the `height` still has the value of `16px` (the font size). But at the same time we see how negative padding would influence the element's position. When content extends its boundaries (the border), the space occupied by the content overlaps the margin space!
 
-These are mostly my thoughts and deductions about negative values in CSS box model. If you stumbled upon any reliable resource that explains the decision behind allowing negative margin and disallowing negative padding, feel free to share in the comments!
+I'm not really sure if that was the reason for making negative padding invalid. If you stumbled upon any reliable resource that explains the decision behind allowing negative margin and disallowing negative padding, feel free to share it in the comments!
 
-For deeper understanding issues mentioned in this article I recommend reading:
-MDN, W3C recommendation, other resources...
+##Resources
+
+Online resources that I was referring to while writing this article:
+
+- [W3C specification for box model](http://www.w3.org/TR/CSS21/box.html).
+- [W3C specification for visual formatting model](http://www.w3.org/TR/CSS21/visuren.html).
+- [MDN article about box model](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model).
+- [Article about Block Formatting Contexts on Sitepoint](http://www.sitepoint.com/understanding-block-formatting-contexts-in-css/).
+- [MDN article about determining elements dimensions](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements) and [resources from MSDN on the same topic](https://msdn.microsoft.com/en-us/library/hh781509(VS.85).aspx).
+- [How browsers work explained on HTML5Rocks](http://www.html5rocks.com/en/tutorials/internals/howbrowserswork/).
+- Community feedback on stackoverflow about [negative margin](http://stackoverflow.com/questions/11495200/how-do-negative-margins-in-css-work-and-why-is-margin-top-5-margin-bottom5) and [negative padding](http://stackoverflow.com/questions/4973988/why-does-css-not-support-negative-padding) was also very helpful.
 
 Thank you for reading!
 
