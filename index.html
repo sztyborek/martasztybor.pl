@@ -5,7 +5,7 @@ layout: default
 <div class="home">
 
   <div class="posts">
-    {% for post in paginator.posts %}
+    {% for post in site.posts %}
       <div class="post py3">
         {% if post.external_page %}
           <p class="post-meta">{{ post.date | date: site.date_format }} 
