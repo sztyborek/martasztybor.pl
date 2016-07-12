@@ -36,7 +36,7 @@ Box model properties are essential for the browser to determine the coordinates 
 	<figcaption>Coordinate system of the browser</figcaption>
 </figure>
 
-##Understanding negative margin
+## Understanding negative margin
 
 Despite its "hackish" reputation negative margin [is allowed by the specification](http://www.w3.org/TR/CSS21/box.html#margin-properties). If applied with care and deep understanding, they produce valid code.
 
@@ -179,7 +179,7 @@ Let's have a `<p>` element with some text content, padding and border:
 This is how it renders in the browser:
 
 <figure>
-  <pre class="codepen" data-height="470" data-type="result" data-href="yeLxjP" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/yeLxjP">Negative padding example: check it out on Codepen</a></pre>
+  <pre class="codepen" data-height="150" data-type="result" data-href="yeLxjP" data-user="sztyborek" data-safe="true"><code></code><a href="http://codepen.io/sztyborek/pen/yeLxjP">Negative padding example: check it out on Codepen</a></pre>
   <script async src="http://codepen.io/assets/embed/ei.js"></script>
 </figure>
 

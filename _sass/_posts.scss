@@ -13,6 +13,15 @@
   padding-bottom: 0;
 }
 
+.post-title {
+  font-family: $heading-font-family;
+}
+
+.post-content,
+.post-summary {
+  font-weight: 300;
+}
+
 .post-link .post-title {
   margin-top: 0;
   font-weight: 600;
