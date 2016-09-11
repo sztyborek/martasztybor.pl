@@ -1,6 +1,6 @@
 # Site settings
 author: Marta Sztybor
-title: I do front-end stuff
+title: Marta Sztybor Blog
 email: hello@martasztybor.pl
 description: "My personal blog, where I am focusing mostly on CSS"
 baseurl: "" # the subpath of your site, e.g. /blog/

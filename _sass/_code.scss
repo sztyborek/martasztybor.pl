@@ -19,8 +19,9 @@ pre {
   padding: 1.125em;
   line-height: 1.11;
   overflow-x: scroll;
-  margin-bottom: .88em;
+  margin-bottom: 0;
   background-color: $pre-background-color;
+  border-radius: 6px;
 }
 
 .highlight .p {
@@ -29,12 +30,12 @@ pre {
 }
 
 pre {
-    counter-reset: line-numbering;
-    white-space: pre;
-    overflow-x: auto;
-    word-break: inherit;
-    word-wrap: inherit;
-    text-align: left;
+  counter-reset: line-numbering;
+  white-space: pre;
+  overflow-x: auto;
+  word-break: inherit;
+  word-wrap: inherit;
+  text-align: left;
 }
 
 pre a::before {

@@ -31,7 +31,7 @@ layout: default
           {% if post.external_page %}
             <a href="{{ post.external_page_link }}" target="_blank">Read more</a>
           {% else %}
-            <a href="{{ post.url | prepend: site.baseurl }}" target="_blank">Read more</a>
+            <a href="{{ post.url | prepend: site.baseurl }}">Read more</a>
           {% endif %}
         </p>
       </div>

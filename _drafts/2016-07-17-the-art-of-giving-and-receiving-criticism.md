@@ -17,28 +17,30 @@ Criticism is an inevitable part of your growth. Nobody's perfect and there's alw
 
 ### Assume they had good intentions
 
-
-
-### Be humble
+Ktoś, kto poświęcił czas na zapoznanie się z Twoją pracą z pewnością nie miał złych intencji
 
 ### Don't take it personally
 
 ### Be positive
 
-### Show gratitude
+### Show your gratitude
 
 Every cloud has a silver lining. The person who's giving you negative feedback took her time to consume and review your work &ndash; isn't it nice to know that somebody shows it their interest? Going further, giving <i>any</i> feedback means showing concern about the work. Be grateful, don't forget to say <i>"thank you"</i> in response!
 
 
 ## Giving criticism
 
-### Give feedback short and to the point
+### Be concise and to the point
 
-Being too verbose with negative feedback can be risky. 
+Any fluff added to your opinion can blur the objective, which is to point out mistakes in somebody's work. 
 
 ### Criticise the work, not the author
 
+Do not show your superiority
+
 ### Give praise for the strong points
+
+Although I previously mentioned being concise, I'd advise
 
 
 Thank you for reading!
