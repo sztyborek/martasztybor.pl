@@ -19,14 +19,8 @@ pre {
   padding: 1.125em;
   line-height: 1.11;
   overflow-x: scroll;
-  margin-bottom: 0;
   background-color: $pre-background-color;
   border-radius: 6px;
-}
-
-.highlight .p {
-  font-size: 1.125rem;
-  line-height: 1;
 }
 
 pre {
@@ -67,4 +61,18 @@ pre a:last-of-type::before {
 
 pre a:only-of-type::before {
   padding: 10px;
+}
+
+h1, h2, h3, h4, h5,
+a {
+  code {
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+}
+
+.example {
+  margin: 2rem 0;
+  font-family: initial !important;
 }

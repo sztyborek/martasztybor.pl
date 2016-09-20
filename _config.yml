@@ -2,10 +2,11 @@
 author: Marta Sztybor
 title: Marta Sztybor Blog
 email: hello@martasztybor.pl
-description: "My personal blog, where I am focusing mostly on CSS"
+description: "Personal blog of Marta Sztybor, UI developer"
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://martasztybor.pl" # the base hostname & protocol for your site
 date_format: "%b %-d, %Y"
+image: /img/me.jpg
 
 # Google services
 google_analytics:
@@ -37,7 +38,7 @@ flattr_button:
 
 # Post sharing icons
 show_sharing_icons: true
-share_text: 'Like it? Share it!'
+share_text: 'Have you found the article useful? Share it!'
 # Change to 'true' to enable individual icons
 share_facebook: true
 share_twitter: true

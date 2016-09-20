@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      The art of giving and receiving criticism
+title:      How to receive negative feedback from your audience (and how to criticise others)
 date:       2016-07-11 14:00:00
 summary:    Test
 categories: Other
