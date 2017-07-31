@@ -34,7 +34,11 @@ layout: default
     <ul class="list-unstyled">
       {% for post in site.posts %}
         <li>
-          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          {% if post.external_page_link %}
+            <a href="{{ post.external_page_link }}">{{ post.title }}</a>
+          {% else %}
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>

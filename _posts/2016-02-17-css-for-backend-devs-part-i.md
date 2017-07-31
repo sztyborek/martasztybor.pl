@@ -1,5 +1,5 @@
 ---
-title:      Quick Guide to CSS for Back-end Developers
+title:      Quick Guide to CSS for Backend Developers
 date:       2016-02-17 01:00:00
 summary:    When debugging CSS code, how many times have you wondered – what exactly is going on here? If you already know all about CSS spells, you can skip right to the more advanced topics. Otherwise, continue on to read this handy “spellbook” I have prepared to provide guidance through the basic principles of CSS.
 categories: CSS

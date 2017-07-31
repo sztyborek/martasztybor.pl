@@ -1,5 +1,5 @@
 ---
-title:      Ice, Fire and the Human Factor in Web Development&#58; Memories From JSConf Iceland
+title:      Why I Wish Every Conference Was Like JSConf Iceland
 date:       2016-09-09 20:00:00
 summary:    The first things you see through the window as the plane approaches the Keflavik airport are a lunar landscape and glaciers. Could you imagine a more exotic place for a JavaScript conference? I was so excited to attend JSConf Iceland not only because of the lineup, but also the surroundings. Iceland is probably one of the most beautiful places in the world!
 categories: frontend conference
