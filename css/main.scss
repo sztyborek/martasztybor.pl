@@ -3,35 +3,160 @@
 ---
 @charset "UTF-8";
 
-/*!
-* Pixyll - A simple, beautiful Jekyll theme that's mobile first.
-* @author John Otander <johnotander@gmail.com> (http://johnotander.com/)
-* @link https://github.com/johnotander/pixyll
-* @license MIT
-*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-@import 'variables';
+body {
+  font: normal 400 18px/1.6 'Open Sans', sans-serif;
+  color: #444;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-@import 'basscss';
+h1, h2, h3, h4 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.25;
+}
 
-@import 'base';
+h1 {
+  font-size: 36px;
+  margin: 28px 0;
+}
 
-@import 'links';
-@import 'positions';
-@import 'clearfix';
+h2 {
+  font-size: 32px;
+  margin: 24px 0;
+}
+
+h3 {
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+p, ol, ul {
+  margin-top: 0;
+  margin-bottom: 16px; 
+}
+
+ol, ul {
+  padding-left: 32pxrem; 
+}
+
+a {
+  text-decoration: none;
+  color: #5339e0;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+blockquote {
+  border-left: 3px solid #222;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  margin-left: -9px;
+  padding-left: 2rem;
+}
+
+blockquote footer {
+  background-color: #fff;
+  border-color: transparent;
+  color: #7a7a7a;
+  font-size: .85rem;
+  font-style: normal;
+  text-align: left;
+  padding: 0;
+}
+
+figure {
+  margin: 32px 16px;
+  text-align: center;
+}
+
+figcaption {
+  color: #7a7a7a;
+  font-size: 16px;
+}
+
+.site-nav {
+  padding-top: 50px;
+  text-align: center;
+
+  a {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin: 10px 0;
+  }
+}
+
+.site-wrap {
+  max-width: 960px;
+  padding: 15px;
+  margin: 0 auto;
+  flex: 1 0 auto;
+}
+
+.site-section {
+  margin: 25px 0;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container--row {
+  flex-direction: row;
+}
+
+.flex-item--half {
+    flex: 1 0 50%;
+  }
+
+@media screen and (min-width: 960px) {
+  .flex-item--half {
+    flex: 1 0 50%;
+  }
+}
+
+.social-media {
+  li {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 32px;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 35px 15px;
+  color: #a0a0a0;
+}
+
+.post-meta {
+  width: auto;
+  font-weight: 300;
+  display: inline-block;
+  margin: 0 16px 16px 0;
+  padding: 15px 0;
+  color: #7a7a7a;
+}
+
 @import 'code';
-@import 'forms';
-@import 'typography';
-@import 'header';
-@import 'tables';
-@import 'animations';
-@import 'figures';
-@import 'footer';
-@import 'social-icons';
-@import 'blockquotes';
-@import 'posts';
-@import 'media-queries';
-@import 'gists';
-@import 'measure';
-@import 'pagination';
-@import 'share-links';

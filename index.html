@@ -2,39 +2,81 @@
 layout: default
 ---
 
-<div class="home">
+<header class="site-section flex-container">
+  <h1>I am a software developer who loves learning and teaching others</h1>
+  <ul class="list-unstyled social-media">
+    <li>
+      <a href="https://github.com/sztyborek" title="GitHub">
+        <span class="fa fa-github"></span>
+      </a>
+    </li>
+    <li>
+      <a href="https://twitter.com/sztyborek" title="Twitter">
+        <span class="fa fa-twitter"></span>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.linkedin.com/in/marta-sztybor-030a2890/">
+        <span class="fa fa-linkedin"></span>
+      </a>
+    </li>
+    <li>
+      <a href="https://codepen.io/sztyborek/">
+        <span class="fa fa-codepen"></span>
+      </a>
+    </li>
+  </ul>
+</header>
 
-  <div class="posts">
-    {% for post in site.posts %}
-      <div class="post py3">
-        {% if post.external_page %}
-          <p class="post-meta">{{ post.date | date: site.date_format }} 
-            at <a href="{{ post.external_page }}" target="_blank">{{ post.external_page_name }}</a>
-          </p>
-        {% else %}
-          <p class="post-meta">{{ post.date | date: site.date_format }}</p>
-        {% endif %}
-        {% if post.external_page %}
-          <a href="{{ post.external_page_link }}" target="_blank" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
-        {% else %}
-          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link"><h3 class="h1 post-title">{{ post.title }}</h3></a>
-        {% endif %}
-        <p class="post-featured-image">
-          <img src="{{ post.image | prepend: site.baseurl }}" alt="Featured image" />
-        </p>
-        <p class="post-summary">
-          {% if post.summary %}
-            {{ post.summary }}
-          {% else %}
-            {{ post.excerpt }}
-          {% endif %}
-          {% if post.external_page %}
-            <a href="{{ post.external_page_link }}" target="_blank">Read more</a>
-          {% else %}
-            <a href="{{ post.url | prepend: site.baseurl }}">Read more</a>
-          {% endif %}
-        </p>
-      </div>
-    {% endfor %}
-  </div>
+<div class="site-section flex-container flex-container--row">
+  <section class="flex-container flex-item--half">
+    <h2>Writing</h2>
+    <ul class="list-unstyled">
+      {% for post in site.posts %}
+        <li>
+          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  <section class="flex-container flex-item--half">
+    <h2>Speaking</h2>
+    <ul class="list-unstyled">
+      <li>
+        <a href="http://slides.com/martasztybor/front-end-dev#/" class="post-link">
+          Frontend developer's career [PL]
+        </a>
+      </li>
+      <li>
+        <a href="http://pywaw.org/58/" class="post-link">
+          CSS for backend developers [PL]
+        </a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=RpabiRAgBLw" class="post-link">
+          Introduction to object oriented CSS [PL]
+        </a>
+      </li>
+    </ul>
+  </section>
 </div>
+
+<div class="site-section flex-container flex-container--row">
+  <section class="flex-container flex-item--half">
+    <h2>I co-organized HTML and CSS workshops for beginners</h2>
+    <a href="https://theawwwesomes.org">The Awwwesomes HTML &amp; CSS workshops</a>
+  </section>
+  <section class="flex-container flex-item--half">
+    <h2>I co-authored an introductory book about creating websites</h2>
+    <a href="https://the-awwwesomes.gitbooks.io/html-css-step-by-step/content/pl/">
+      The Awwwesomes HTML &amp; CSS tutorial
+    </a>
+  </section>
+</div>
+
+
+
+
+
+
+

@@ -1,3 +1,26 @@
+$pre-border-radius: 0;
+$pre-background-color: #fafafa;
+
+$hljs-comment: #777;
+$hljs-keyword: #00369f;
+$hljs-name: #333;
+$hljs-number: #009f06 ;
+$hljs-string: #f95020;
+$hljs-title: #f95020;
+$hljs-type: #00369f;
+$hljs-tag: #00369f;
+$hljs-attribute: #009f06;
+$hljs-regexp: #009f06;
+$hljs-symbol: #f92080;
+$hljs-built-in: #00369f;
+$hljs-preprocessor: #777;
+$hljs-deletion: #ffdddd;
+$hljs-addition: #ddffdd;
+$hljs-change: #00369f;
+$hljs-chunk: #ccc;
+
+@import 'syntax';
+
 pre,
 pre code {
   background-color: transparent;
@@ -6,13 +29,13 @@ pre code {
 
 pre,
 code {
-  font-family: $monospace-font-family;
+  font-family: 'Source Code Pro', Consolas, monospace;
 }
 
 code {
   color: #7a7a7a;
   padding: .15rem .45rem;
-  font-size: .8rem;
+  line-height: 1.6;
 }
 
 pre {
@@ -40,7 +63,7 @@ pre a::before {
   text-align: right;
   opacity: 0.7;
   display: inline-block;
-  color: $light-gray;
+  color: #ccc;
   margin-right: 16px;
   font-size: 13px;
   -webkit-touch-callout: none;
