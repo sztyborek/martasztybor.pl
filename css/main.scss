@@ -136,15 +136,17 @@ figcaption {
 
 .flex-item--half {
     flex: 1 0 50%;
-  }
+}
 
 @media screen and (min-width: 1024px) {
   .flex-container--row {
     flex-direction: row;
+    margin: -15px;
   }
 
   .flex-item--half {
     flex: 1 0 50%;
+    padding: 15px;
   }
 }
 
