@@ -7,8 +7,18 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 24px;
+}
+
+@media screen and (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 body {
-  font: normal 400 18px/1.6 'Open Sans', sans-serif;
+  font: normal 400 1rem/1.6 'Open Sans', sans-serif;
   color: #444;
   margin: 0;
   min-height: 100vh;
@@ -25,36 +35,32 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 36px;
-  margin: 28px 0;
+  font-size: 2rem;
+  margin: 1.5rem 0;
 }
 
 h2 {
-  font-size: 32px;
-  margin: 24px 0;
+  font-size: 1.5rem;
+  margin: 1.2rem 0;
 }
 
 h3 {
-  font-size: 28px;
-  margin: 20px 0;
+  font-size: 1.3rem;
+  margin: 1.1rem 0;
 }
 
 p, ol, ul {
   margin-top: 0;
-  margin-bottom: 16px; 
+  margin-bottom: 1rem; 
 }
 
 ol, ul {
-  padding-left: 32pxrem; 
+  padding-left: 1rem; 
 }
 
 a {
   text-decoration: none;
   color: #5339e0;
-}
-
-p {
-  margin-bottom: 16px;
 }
 
 blockquote {
@@ -76,17 +82,17 @@ blockquote footer {
 }
 
 figure {
-  margin: 32px 16px;
+  margin: 2rem 1rem;
   text-align: center;
 }
 
 figcaption {
   color: #7a7a7a;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .site-nav {
-  padding-top: 50px;
+  padding-top: 2rem;
   text-align: center;
 
   a {
@@ -102,19 +108,25 @@ figcaption {
   padding: 0;
 
   li {
-    margin: 10px 0;
+    margin: .8rem 0;
   }
 }
 
 .site-wrap {
-  max-width: 960px;
-  padding: 15px;
-  margin: 0 auto;
+  padding: 20px;
   flex: 1 0 auto;
 }
 
+@media screen and (min-width: 1024px) {
+  .site-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+
 .site-section {
-  margin: 25px 0;
+  margin: 1.5rem 0;
 }
 
 .flex-container {
@@ -122,15 +134,15 @@ figcaption {
   flex-direction: column;
 }
 
-.flex-container--row {
-  flex-direction: row;
-}
-
 .flex-item--half {
     flex: 1 0 50%;
   }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 1024px) {
+  .flex-container--row {
+    flex-direction: row;
+  }
+
   .flex-item--half {
     flex: 1 0 50%;
   }
@@ -139,14 +151,14 @@ figcaption {
 .social-media {
   li {
     display: inline-block;
-    margin: 0 15px;
-    font-size: 32px;
+    margin: 0 .8rem;
+    font-size: 2rem;
   }
 }
 
 footer {
   text-align: center;
-  padding: 35px 15px;
+  padding: 1rem 20px;
   color: #a0a0a0;
 }
 
@@ -154,8 +166,8 @@ footer {
   width: auto;
   font-weight: 300;
   display: inline-block;
-  margin: 0 16px 16px 0;
-  padding: 15px 0;
+  margin: 0 1rem 1rem 0;
+  padding: 1rem 0;
   color: #7a7a7a;
 }
 
