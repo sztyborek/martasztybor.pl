@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Marta Sztybor Blog</title>
+    <description>Personal blog of Marta Sztybor, UI developer</description>
+    <link>http://martasztybor.pl/</link>
+    <atom:link href="http://martasztybor.pl/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Basic Responsive Typography Solution I Often Use</title>
+        
+          <description>&lt;p&gt;Typography for Web and, specifically, responsive typography is a very broad topic. To be honest, I haven’t mastered yet any bulletproof responsive typography technique. I usually work with web applications, which mostly don’t include huge chunks of text. In such cases the solution described in this blogpost can be sufficient.&lt;/p&gt;
+
+&lt;p&gt;But if you are looking for a verbose, extensive article presenting various aspects of (responsive) typography, jump straight to &lt;a href=&quot;./#further-reading&quot;&gt;further reading&lt;/a&gt;. I recommended a list of articles which can help you to learn the aspects of web typography.&lt;/p&gt;
+
+&lt;h2 id=&quot;basic-responsive-typography-with-rems&quot;&gt;Basic responsive typography with &lt;code class=&quot;highlighter-rouge&quot;&gt;rem&lt;/code&gt;s&lt;/h2&gt;
+
+&lt;p&gt;Solution described below can be a good starting point to learn more sophisticated techniques. Here we will use a combination of media queries and using &lt;code class=&quot;highlighter-rouge&quot;&gt;rem&lt;/code&gt;s as our sizing units for fonts and measure.&lt;/p&gt;
+
+&lt;p&gt;The first step is to set a base font size on the document root element. We will be using &lt;code class=&quot;highlighter-rouge&quot;&gt;rem&lt;/code&gt;s, so &lt;a href=&quot;https://snook.ca/archives/html_and_css/font-size-with-rem&quot;&gt;to make maths simpler&lt;/a&gt; we’re going to set it as &lt;code class=&quot;highlighter-rouge&quot;&gt;10px&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* 1rem = 10px */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We will be also implementing a mobile first approach, so the font size above will be applied for smallest screens. The next step is to set root font sizes for a couple of breakpoints for larger screens:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;min-width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;48em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;min-width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;62em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;14px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;min-width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;75em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The breakpoints are set in &lt;code class=&quot;highlighter-rouge&quot;&gt;em&lt;/code&gt;s for &lt;a href=&quot;https://cloudfour.com/thinks/the-ems-have-it-proportional-media-queries-ftw/&quot;&gt;proper scaling when user zooms in&lt;/a&gt; the page.&lt;/p&gt;
+
+&lt;p&gt;The base &lt;code class=&quot;highlighter-rouge&quot;&gt;font-size: 10px&lt;/code&gt; is too small even for the smallest screens, so we need to set a font size for body, which will cascade for all elements. I picked &lt;code class=&quot;highlighter-rouge&quot;&gt;1.4rem&lt;/code&gt;, which equals &lt;code class=&quot;highlighter-rouge&quot;&gt;14px&lt;/code&gt; for small screens and will scale up according to breakpoints shown above.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.4rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.45&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Arial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sans-serif&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And the last step of our setup is to globally set the font sizes in &lt;code class=&quot;highlighter-rouge&quot;&gt;rem&lt;/code&gt;s for basic typography elements like paragraphs and headings.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-bottom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;h3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;h4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;line-height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.5rem&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2.25rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;h2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;h3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.8rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;h4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.6rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;QKmgOy&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/QKmgOy&quot;&gt;Responsive typography setup demo: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+  &lt;figcaption&gt;Responsive typography setup demo&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;further-reading&quot;&gt;Further reading&lt;/h2&gt;
+
+&lt;p&gt;Solution described above doesn’t take into account things like vertical rhythm or responsive headlines. Here is a list of articles which can help you understand such aspects and learn how to implement them into your projects.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.kaikkonendesign.fi/typography/&quot;&gt;Interactive guide to web typography&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://typecast.com/blog/4-simple-steps-to-vertical-rhythm&quot;&gt;4 simple steps to vertical rhythm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.modularscale.com/&quot;&gt;Modular scale calculator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tympanus.net/codrops/2013/11/19/techniques-for-responsive-typography/&quot;&gt;Techniques for responsive typography&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.smashingmagazine.com/2016/05/fluid-typography/&quot;&gt;Fluid typography with &lt;code class=&quot;highlighter-rouge&quot;&gt;vw&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vh&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zellwk.com/blog/responsive-typography/&quot;&gt;Responsive typography with vertical rhythm using Sass&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.smashingmagazine.com/2015/06/responsive-typography-with-sass-maps/&quot;&gt;Responsive typography with Sass maps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        
+        <pubDate>Sun, 09 Oct 2016 16:00:00 +0200</pubDate>
+        
+          <link>http://martasztybor.pl/css/typography/responsive/2016/10/09/basic-responsive-typography-solution/</link>
+        
+        
+          <guid isPermaLink="true">http://martasztybor.pl/css/typography/responsive/2016/10/09/basic-responsive-typography-solution/</guid>
+        
+      </item>
+    
+      <item>
+        <title>Useful CSS Features You May Have Not Known About</title>
+        
+          <description>&lt;p&gt;At work I’m sometimes surprised when I discover a CSS feature that enables me to use some clever trick. Some of these features are brand new and still not widely supported (hello, polyfills!), others are pretty old but not commonly known.&lt;/p&gt;
+
+&lt;p&gt;Also, if you’re anything like me and prefer digging for “pure CSS” solutions rather than coding in JavaScript, you may find here a couple of hints that will make your life (as a developer) easier.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;./#css-counters&quot;&gt;Dynamically generating counters using only CSS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./#pure-css-lightbox&quot;&gt;Internal links and pure CSS lightboxes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./#pure-css-sticky-menus&quot;&gt;JavaScript-less sticky menus&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./#attr-function&quot;&gt;Accessing the HTML attributes’ values using CSS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./#currentcolor-property&quot;&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;currentColor&lt;/code&gt; property&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;./#css-feature-queries&quot;&gt;CSS feature queries&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;css-counters&quot;&gt;Dynamically generating counters using only CSS&lt;/h2&gt;
+
+&lt;p&gt;Assume we have a collection of items represented by HTML elements. We want them to be ordered and displayed with proper numbers. First thing that comes to mind is to mark them up as ordered list (&lt;code class=&quot;highlighter-rouge&quot;&gt;ol&lt;/code&gt;), and the browser will do the job for us.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ol&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Tidy the room&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Buy groceries&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Write blogpost&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ol&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;example&quot;&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Tidy the room&lt;/li&gt;
+    &lt;li&gt;Buy groceries&lt;/li&gt;
+    &lt;li&gt;Write blogpost&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;p&gt;So far, so good. We have semantic HTML and proper presentation. But what if we want to display the list with nested numbers? Or want to change the default look of numbers to fit into our designs? Oh yes, it’s possible to do it by hand, but&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;it’s tedious,&lt;/li&gt;
+  &lt;li&gt;won’t work if the content is generated dynamically.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s possible to manipulate our HTML with JavaScript, but we are lazy developers, aren’t we? We want to use some pure CSS solution, which will be simpler and more performant. Say “hello” to CSS counters, which allow you to dynamically add order numbers to your lists and generated content.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;CSS counters are, in essence, variables maintained by CSS whose values may be incremented by CSS rules to track how many times they’re used. This lets you adjust the appearance of content based on its placement in the document.&lt;/p&gt;
+
+  &lt;p&gt;– &lt;cite&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters&quot;&gt;MDN&lt;/a&gt;&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To start generating numbers with CSS counters we need to know how to do the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;initialize the counter,&lt;/li&gt;
+  &lt;li&gt;increment the counter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We initialize the counter for a parent element, which will contain our list of elements. It can be done with a &lt;code class=&quot;highlighter-rouge&quot;&gt;counter-reset&lt;/code&gt; property.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;ol&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;counter-reset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We need to provide a name for our counter to identify it. It works like a variable name, which we set as a &lt;code class=&quot;highlighter-rouge&quot;&gt;counter-reset&lt;/code&gt; property value.&lt;/p&gt;
+
+&lt;p&gt;Then we can increment our counter using &lt;code class=&quot;highlighter-rouge&quot;&gt;counter-increment&lt;/code&gt; property:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;ol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;counter-increment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Alright, so we’re all set. Now we need to replace the default numbers of the ordered list and make them more stylish. It’s possible with the use of pseudoelements and &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; property.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;ol&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;list-style-type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;ol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;::before&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;counter-increment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counter-name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can successfuly use counters not only for lists, but also for document sections (marking chapters with numbers, like in the codepen below) and other types of elements.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;RRxRbQ&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/RRxRbQ&quot;&gt;Auto numbering chapters with CSS counters: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+  &lt;figcaption&gt;Auto numbering chapters with CSS counters&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;browser-support&quot;&gt;Browser support&lt;/h3&gt;
+
+&lt;p&gt;In fact CSS counters exist for a pretty long time in the spec, so the browser support is awesome.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Chrome&lt;/th&gt;
+      &lt;th&gt;Firefox&lt;/th&gt;
+      &lt;th&gt;Safari&lt;/th&gt;
+      &lt;th&gt;Internet Explorer/Edge&lt;/th&gt;
+      &lt;th&gt;Opera&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+      &lt;td&gt;8+&lt;/td&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;resources-and-further-reading&quot;&gt;Resources and further reading&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://una.im/css-games/&quot;&gt;Pure CSS games with &lt;code class=&quot;highlighter-rouge&quot;&gt;counter-increment&lt;/code&gt;&lt;/a&gt; by Una Kravets&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters&quot;&gt;MDN article about using CSS counters&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;About &lt;a href=&quot;https://www.smashingmagazine.com/2013/04/css-generated-content-counters/&quot;&gt;CSS counters and generated content&lt;/a&gt; on Smashing Magazine&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://scotch.io/tutorials/getting-started-with-css-counters&quot;&gt;More practical examples of CSS counters usage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pure-css-lightbox&quot;&gt;Internal links and pure CSS lightboxes&lt;/h2&gt;
+
+&lt;p&gt;With HTML, it’s possible to link not only to external resources, but also to certain sections of a document. Such links are called the &lt;i&gt;anchor links&lt;/i&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#useful-css-properties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Useful CSS properties&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;useful-css-properties&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Useful CSS properties&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;They are defined by a reference to an element’s &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; attribute. We can enhance the experience of such kind of navigation using only CSS. There is a &lt;code class=&quot;highlighter-rouge&quot;&gt;:target&lt;/code&gt; pseudoclass, which can be used to select and style internal links in the document.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;xEVxAK&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/xEVxAK&quot;&gt;Yellow fade technique demo: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+  &lt;figcaption&gt;The :target pseudoclass in use&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The example above is very simple and not very surprising. If you are waiting for something that will blow your mind or just make you think “oh, why I’ve been doing that using JavaScript for all these years” – there is indeed one clever trick involving &lt;code class=&quot;highlighter-rouge&quot;&gt;:target&lt;/code&gt; pseudoclass.&lt;/p&gt;
+
+&lt;p&gt;We can create simple lightboxes without a single line of JavaScript. Here is the markup for our elements:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#about-me&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;About me&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;about-me&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;lightbox&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;close-me&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+    Lightbox content
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We need to create a link to an existing section in our document. Clicking on this link should cause the lightbox to appear and apart from that we should also be able to close it. The magic here belongs to CSS.&lt;/p&gt;
+
+&lt;p&gt;Our lightbox should be initially hidden. We can apply &lt;code class=&quot;highlighter-rouge&quot;&gt;display: none&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;.lightbox&lt;/code&gt; element, but to make the effect more visually appealing we can enhance it with CSS transforms.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.lightbox&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;fixed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.3s&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ease-in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;It’s also very important to apply &lt;code class=&quot;highlighter-rouge&quot;&gt;position: fixed&lt;/code&gt; to remove our lightbox from the document flow to make it look and behave exactly like a lightbox.&lt;/p&gt;
+
+&lt;p&gt;The lightbox’s &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; value should be the same as the &lt;code class=&quot;highlighter-rouge&quot;&gt;href&lt;/code&gt; attribute value of the link. Then the following lines of CSS are responsible for opening the lightbox:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.lightbox&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:target&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;ORNPRo&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/ORNPRo&quot;&gt;Pure CSS lightbox: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+  &lt;figcaption&gt;Pure CSS lightbox example&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;browser-support-1&quot;&gt;Browser support&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Chrome&lt;/th&gt;
+      &lt;th&gt;Firefox&lt;/th&gt;
+      &lt;th&gt;Safari&lt;/th&gt;
+      &lt;th&gt;Internet Explorer/Edge&lt;/th&gt;
+      &lt;th&gt;Opera&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+      &lt;td&gt;3.5+&lt;/td&gt;
+      &lt;td&gt;3.2+&lt;/td&gt;
+      &lt;td&gt;7+&lt;/td&gt;
+      &lt;td&gt;10.1+&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;resources-and-further-reading-1&quot;&gt;Resources and further reading&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/:target&quot;&gt;Article on MDN documenting the &lt;code class=&quot;highlighter-rouge&quot;&gt;:target&lt;/code&gt; pseudoclass&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blogs.adobe.com/dreamweaver/2015/01/using-the-css-target-selector-to-create-javascript-less-ui-effects.html&quot;&gt;Using The CSS &lt;code class=&quot;highlighter-rouge&quot;&gt;:target&lt;/code&gt; Selector To Create JavaScript-less UI Effects&lt;/a&gt; by Sara Soueidan&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hacks.mozilla.org/2012/02/a-simple-image-gallery-using-only-css-and-the-target-selector/&quot;&gt;A simple image gallery using only CSS and the &lt;code class=&quot;highlighter-rouge&quot;&gt;:target&lt;/code&gt; selector&lt;/a&gt; by Christian Heilmann&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pure-css-sticky-menus&quot;&gt;JavaScript-less sticky menus&lt;/h2&gt;
+
+&lt;p&gt;Sticky navigation menus are quite popular in contemporary web design. Creating a fixed menu and changing its &lt;code class=&quot;highlighter-rouge&quot;&gt;position&lt;/code&gt; when scrolling the document is feasible with a couple of lines of JavaScript. But if there is such demand for a certain design pattern implementation, shouldn’t it land in CSS specification soon?&lt;/p&gt;
+
+&lt;p&gt;In fact, there is a possibility to create a sticky menu with just a single line of CSS. Unfortunately, for now it only exists as an experimental feature (you can find the &lt;a href=&quot;https://drafts.csswg.org/css-position/#sticky-positioning&quot;&gt;draft&lt;/a&gt; in the spec).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.menu&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sticky&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Turn the “experimental” flag in your browser and fasten your seatbelts!&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;WGwQbk&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/WGwQbk&quot;&gt;Pure CSS sticky menu: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+  &lt;figcaption&gt;Pure CSS sticky menu&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;browser-support-2&quot;&gt;Browser support&lt;/h3&gt;
+
+&lt;p&gt;In Chrome and Firefox the feature works only after turning on the “experimental” flag.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Chrome&lt;/th&gt;
+      &lt;th&gt;Firefox&lt;/th&gt;
+      &lt;th&gt;Safari&lt;/th&gt;
+      &lt;th&gt;Internet Explorer/Edge&lt;/th&gt;
+      &lt;th&gt;Opera&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;No support&lt;/td&gt;
+      &lt;td&gt;32+&lt;/td&gt;
+      &lt;td&gt;6.1+&lt;/td&gt;
+      &lt;td&gt;No support&lt;/td&gt;
+      &lt;td&gt;No support&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;resources-and-further-reading-2&quot;&gt;Resources and further reading&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sitepoint.com/css-position-sticky-introduction-polyfills/&quot;&gt;CSS &lt;code class=&quot;highlighter-rouge&quot;&gt;position: sticky&lt;/code&gt; – Introduction and Polyfills&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;attr-function&quot;&gt;Accessing the HTML attributes&#39; values using CSS&lt;/h2&gt;
+
+&lt;p&gt;Apart from CSS counters there are various ways to fill the generated content. One of them is accessing the value of HTML attributes using the &lt;code class=&quot;highlighter-rouge&quot;&gt;attr()&lt;/code&gt; function.&lt;/p&gt;
+
+&lt;p&gt;We can use this feature for creating links accessible in print media.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;For more information see 
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://martasztybor.pl/css/useful-css-features/&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    the article about useful CSS features
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;py&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;after&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot; (&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;)&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The result then should look like below:&lt;/p&gt;
+
+&lt;div class=&quot;example&quot;&gt;
+  For more information see the article about useful CSS features (http://martasztybor.pl/css/useful-css-features/)
+&lt;/div&gt;
+
+&lt;p&gt;Ire Aderinokun on her blog &lt;a href=&quot;https://bitsofco.de&quot;&gt;bitsofco.de&lt;/a&gt; described a clever trick with the use of the &lt;code class=&quot;highlighter-rouge&quot;&gt;attr()&lt;/code&gt; feature. It proves that &lt;a href=&quot;https://bitsofco.de/styling-broken-images/&quot;&gt;styling broken images&lt;/a&gt; is possible.&lt;/p&gt;
+
+&lt;h3 id=&quot;browser-support-3&quot;&gt;Browser support&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Chrome&lt;/th&gt;
+      &lt;th&gt;Firefox&lt;/th&gt;
+      &lt;th&gt;Safari&lt;/th&gt;
+      &lt;th&gt;Internet Explorer/Edge&lt;/th&gt;
+      &lt;th&gt;Opera&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2+&lt;/td&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+      &lt;td&gt;3.1+&lt;/td&gt;
+      &lt;td&gt;8+&lt;/td&gt;
+      &lt;td&gt;9+&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;currentcolor-property&quot;&gt;The &lt;code&gt;currentColor&lt;/code&gt; property&lt;/h2&gt;
+
+&lt;p&gt;Before CSS variables (custom properties) will become widely supported, we can alredy use a value with a variable-like feel. It’s called &lt;code class=&quot;highlighter-rouge&quot;&gt;currentColor&lt;/code&gt; and its usage is limited to properties that accept color as a value.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.simple-module&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;hotpink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;box-shadow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In the example above the element’s font color will be applied to both to &lt;code class=&quot;highlighter-rouge&quot;&gt;border&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;box-shadow&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I prepared a small example of menu with a couple of items to show how &lt;code class=&quot;highlighter-rouge&quot;&gt;currentColor&lt;/code&gt; can help us write more reusable code. In the example the &lt;code class=&quot;highlighter-rouge&quot;&gt;menu-item&lt;/code&gt;’s left border and icon should change the color on hover and the color of each item should be different.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;nav&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;menu-item menu-item--shop&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;svg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;viewBox=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0 0 32 32&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;use&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xlink:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#icon-cart&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/use&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/svg&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Shop&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;menu-item menu-item--videos&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;svg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;viewBox=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0 0 32 32&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;use&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xlink:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#icon-play&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/use&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/svg&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Videos&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;menu-item menu-item--gallery&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;svg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;viewBox=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0 0 32 32&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;use&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xlink:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#icon-image&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/use&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/svg&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Gallery&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;menu-item menu-item--contact&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;svg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;viewBox=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0 0 32 32&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;use&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xlink:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#icon-phone&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/use&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/svg&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Contact&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/nav&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-scss&quot; data-lang=&quot;scss&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Normal state 
+&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.menu-item&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;border-bottom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;err&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;border-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#b5b5b5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// Items&#39; colors definitions
+&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;svg&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--shop&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#24C7B7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--videos&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#D45542&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--gallery&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#DEB63E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--contact&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;#161652&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Hovered state
+&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;.menu-item&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:hover&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;border-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;svg&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As we can see, there is no need to separately define colors for the icon and the border for each of the menu items.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;EgKkmz&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/EgKkmz&quot;&gt;currentColor menu example: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+  &lt;figcaption&gt;More modular menu items coloring&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;resources-and-further-reading-3&quot;&gt;Resources and further reading&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/currentcolor/&quot;&gt;Short explanation on CSS-Tricks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/cascading-svg-fill-color/&quot;&gt;Cascading SVG Fill Color&lt;/a&gt; on CSS-Tricks&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blogs.adobe.com/dreamweaver/2015/02/extending-the-color-cascade-with-the-css-currentcolor-variable.html&quot;&gt;Extending the Color Cascade with the CSS &lt;code class=&quot;highlighter-rouge&quot;&gt;currentColor&lt;/code&gt; Variable&lt;/a&gt; by Sara Soueidan&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://osvaldas.info/keeping-css-short-with-currentcolor&quot;&gt;Keeping CSS short with &lt;code class=&quot;highlighter-rouge&quot;&gt;currentColor&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;browser-support-4&quot;&gt;Browser support&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Chrome&lt;/th&gt;
+      &lt;th&gt;Firefox&lt;/th&gt;
+      &lt;th&gt;Safari&lt;/th&gt;
+      &lt;th&gt;Internet Explorer&lt;/th&gt;
+      &lt;th&gt;Opera&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+      &lt;td&gt;4+&lt;/td&gt;
+      &lt;td&gt;9+&lt;/td&gt;
+      &lt;td&gt;Any&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;css-feature-queries&quot;&gt;CSS Feature queries&lt;/h2&gt;
+
+&lt;p&gt;A &lt;a href=&quot;https://modernizr.com/&quot;&gt;Modernizr&lt;/a&gt; for CSS features? An automated &lt;a href=&quot;http://caniuse.com/&quot;&gt;“Can I Use?”&lt;/a&gt; in your stylesheets? You’re welcome!&lt;/p&gt;
+
+&lt;p&gt;Apart from querying for a certain type of media using &lt;code class=&quot;highlighter-rouge&quot;&gt;@media&lt;/code&gt; &lt;a href=&quot;https://css-tricks.com/the-at-rules-of-css/&quot;&gt;at-rule&lt;/a&gt; it’s also possible to  query for CSS features. The rule &lt;code class=&quot;highlighter-rouge&quot;&gt;@supports&lt;/code&gt; can be used for testing if browser supports a certain feature and then apply nested CSS rules if the condition is met. For example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@supports&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  
+  &lt;span class=&quot;nc&quot;&gt;.my-element&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;justify-content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Feature queries can help us to tackle uneven browser support and progressively enhance our websites.&lt;/p&gt;
+
+&lt;h3 id=&quot;resources-and-further-reading-4&quot;&gt;Resources and further reading&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sitepoint.com/an-introduction-to-css-supports-rule-feature-queries/&quot;&gt;An Introduction to CSS’s &lt;code class=&quot;highlighter-rouge&quot;&gt;@supports&lt;/code&gt; Rule (Feature Queries)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.creativebloq.com/css3/how-use-supports-rule-your-css-11410545&quot;&gt;How to use the &lt;code class=&quot;highlighter-rouge&quot;&gt;@supports&lt;/code&gt; rule in your CSS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;browser-support-5&quot;&gt;Browser support&lt;/h3&gt;
+
+&lt;p&gt;Unfortunately, the browser support isn’t too good for feature queries (they still aren’t supported in MS Edge).&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Chrome&lt;/th&gt;
+      &lt;th&gt;Firefox&lt;/th&gt;
+      &lt;th&gt;Safari&lt;/th&gt;
+      &lt;th&gt;Internet Explorer/Edge&lt;/th&gt;
+      &lt;th&gt;Opera&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;28+&lt;/td&gt;
+      &lt;td&gt;22+&lt;/td&gt;
+      &lt;td&gt;9+&lt;/td&gt;
+      &lt;td&gt;No support&lt;/td&gt;
+      &lt;td&gt;12.1+&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+        
+        <pubDate>Mon, 19 Sep 2016 16:00:00 +0200</pubDate>
+        
+          <link>http://martasztybor.pl/css/2016/09/19/useful-css-features-you-may-have-not-known-about/</link>
+        
+        
+          <guid isPermaLink="true">http://martasztybor.pl/css/2016/09/19/useful-css-features-you-may-have-not-known-about/</guid>
+        
+      </item>
+    
+      <item>
+        <title>Ice, Fire and the Human Factor in Web Development&amp;#58; Memories From JSConf Iceland</title>
+        
+          <description>The first things you see through the window as the plane approaches the Keflavik airport are a lunar landscape and glaciers. Could you imagine a more exotic place for a JavaScript conference? I was so excited to attend JSConf Iceland not only because of the lineup, but also the surroundings. Iceland is probably one of the most beautiful places in the world!</description>
+        
+        <pubDate>Fri, 09 Sep 2016 22:00:00 +0200</pubDate>
+        
+          <link>http://10clouds.com/blog/jsconf-iceland-web-development-conference/</link>
+        
+        
+          <guid isPermaLink="true">http://10clouds.com/blog/jsconf-iceland-web-development-conference/</guid>
+        
+      </item>
+    
+      <item>
+        <title>Quick Guide to CSS for Back-end Developers</title>
+        
+          <description>When debugging CSS code, how many times have you wondered – what exactly is going on here? If you already know all about CSS spells, you can skip right to the more advanced topics. Otherwise, continue on to read this handy “spellbook” I have prepared to provide guidance through the basic principles of CSS.</description>
+        
+        <pubDate>Wed, 17 Feb 2016 02:00:00 +0100</pubDate>
+        
+          <link>https://10clouds.com/blog/css-backend-developers/</link>
+        
+        
+          <guid isPermaLink="true">https://10clouds.com/blog/css-backend-developers/</guid>
+        
+      </item>
+    
+      <item>
+        <title>Negative Padding&amp;#58; Unboxing the Box Model</title>
+        
+          <description>&lt;p&gt;This post is inspired with a discussion we had once at &lt;a href=&quot;http://10clouds.com&quot;&gt;our workplace&lt;/a&gt;. It started with a question, asked by one of the backend developers:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Why do we have negative margin in CSS, while there’s no possibility to set negative padding?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The first thing which comes to mind is probably: “Because negative padding makes no sense!”. It’s not a complete answer though. I like such “out of the box” (pun intended) questions, so I’ll try to break down the problem and take a closer look of the box model. The spec defines it as it goes:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The CSS &lt;a href=&quot;http://www.w3.org/TR/CSS21/box.html&quot;&gt;box model&lt;/a&gt; describes the rectangular boxes that are generated for elements in the document tree and laid out according to the &lt;a href=&quot;http://www.w3.org/TR/CSS21/visuren.html&quot;&gt;visual formatting model&lt;/a&gt;.&lt;/p&gt;
+
+  &lt;p&gt;– &lt;cite&gt;&lt;a href=&quot;http://www.w3.org&quot;&gt;W3C&lt;/a&gt;&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure&gt;
+  &lt;img src=&quot;/img/negative-padding/boxdim.png&quot; alt=&quot;CSS box model&quot; /&gt;
+	&lt;figcaption&gt;CSS Box Model&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Every box has its content area which optionally can be surrounded by padding, border and margin area. Each of them has different purposes. Let’s focus on the padding and the margin:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Padding pushes away the border from the content, so it makes the space around the content. When it’s set to zero, the padding edge is the same as the content edge.&lt;/li&gt;
+  &lt;li&gt;Margin pushes away the content from any other existing boxes. It is used to make the horizontal and vertical space between elements. When margin is set to zero, it means that the margin edge is the same as the border edge.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s possible to set box model values by setting corresponding CSS properties (for example, to apply element’s dimensions, use &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt; to set padding width). You must keep in mind that there are &lt;a href=&quot;http://www.impressivewebs.com/difference-block-inline-css/&quot;&gt;several differences&lt;/a&gt; between setting the box model properties for block level and inline level elements.&lt;/p&gt;
+
+&lt;p&gt;Box model properties are essential for the browser to determine the coordinates of the element and the space that it occupies on the page. Browser uses a coordinate system with &lt;code class=&quot;highlighter-rouge&quot;&gt;(0,0)&lt;/code&gt; point placed in the top left corner of the document (which pretty much corresponds with the &lt;code class=&quot;highlighter-rouge&quot;&gt;html&lt;/code&gt; element). Elements’ positions are measured in pixels with positive &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt; direction going to the right and positive &lt;code class=&quot;highlighter-rouge&quot;&gt;y&lt;/code&gt; direction to the bottom.&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&quot;/img/negative-padding/coordinates.png&quot; alt=&quot;Coordinate system of the browser&quot; /&gt;
+	&lt;figcaption&gt;Coordinate system of the browser&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&quot;understanding-negative-margin&quot;&gt;Understanding negative margin&lt;/h2&gt;
+
+&lt;p&gt;Despite its “hackish” reputation negative margin &lt;a href=&quot;http://www.w3.org/TR/CSS21/box.html#margin-properties&quot;&gt;is allowed by the specification&lt;/a&gt;. If applied with care and deep understanding, they produce valid code.&lt;/p&gt;
+
+&lt;p&gt;Like I mentioned above margins are used to create spacing between elements. To add any whitespace the margin value must be more than zero. Therefore, if we set negative margin value, it will cause elements to overlap. Let’s see how the elements with negative margin set behave:&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;GoROMY&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/GoROMY&quot;&gt;Negative margin demo: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+	&lt;figcaption&gt;Visualization: adjacent elements with positive top margin value applied to the second one (left) and negative top margin value (right) - the second element overlaps the first one&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;For every element with &lt;code class=&quot;highlighter-rouge&quot;&gt;position: static&lt;/code&gt; (which is the default &lt;code class=&quot;highlighter-rouge&quot;&gt;position&lt;/code&gt; property value) and no &lt;code class=&quot;highlighter-rouge&quot;&gt;float&lt;/code&gt; applied:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;When &lt;strong&gt;top or left&lt;/strong&gt; margin is set to negative value, it pulls the element &lt;strong&gt;and&lt;/strong&gt; the following elements up or left.&lt;/li&gt;
+  &lt;li&gt;When &lt;strong&gt;bottom or right&lt;/strong&gt; margin is set to negative, it pulls only the following elements up or left.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Every element with &lt;code class=&quot;highlighter-rouge&quot;&gt;position&lt;/code&gt; value other than &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt; (which means: &lt;code class=&quot;highlighter-rouge&quot;&gt;absolute&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;relative&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;fixed&lt;/code&gt;) &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Stacking_without_z-index&quot;&gt;creates new stacking context&lt;/a&gt;. Absolute positioning removes the element from the document flow. In this case the main difference will be &lt;strong&gt;not pulling&lt;/strong&gt; the following elements in the direction of negative margin. The same goes for elements with fixed positioning.&lt;/p&gt;
+
+&lt;p&gt;Case becomes a little more complex for floated elements. However &lt;a href=&quot;http://robin.medvedi.eu/morning-headache-float-negative-margin-and-ie8/&quot;&gt;the thing can be a little quirky&lt;/a&gt; and doesn’t really fall within the scope of this article, so if you’re interested I encourage you to further reading.&lt;/p&gt;
+
+&lt;h3 id=&quot;differences-between-negative-margin-and-relative-positioning&quot;&gt;Differences between negative margin and relative positioning&lt;/h3&gt;
+
+&lt;p&gt;Applying &lt;code class=&quot;highlighter-rouge&quot;&gt;position: relative&lt;/code&gt; makes an element shift its position relatively to its original position. Having that in mind one may assume that this technique does exactly the same as negative margin. There are two main differences though:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The element’s original position remains in the flow of the document. It means that if we apply, for example &lt;code class=&quot;highlighter-rouge&quot;&gt;top: -20px&lt;/code&gt;, the element will be shifted upwards but its original space will remain and the following elements will &lt;strong&gt;not&lt;/strong&gt; be shifted.&lt;/li&gt;
+  &lt;li&gt;For an element with &lt;code class=&quot;highlighter-rouge&quot;&gt;position: relative&lt;/code&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;z-index&lt;/code&gt; property will work. You must keep in mind that &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Adding_z-index&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;z-index&lt;/code&gt; works only for positioned elements&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;zrYLpN&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/zrYLpN&quot;&gt;Negative margin vs position relative: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+	&lt;figcaption&gt;Visualization of the main difference between relative positioning and negative margin&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;use-cases-of-negative-margin&quot;&gt;Use cases of negative margin&lt;/h3&gt;
+
+&lt;p&gt;Nowadays there are several use cases when negative margin can come in handy:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Centering a block element of known dimensions (source: &lt;a href=&quot;https://css-tricks.com/centering-css-complete-guide/&quot;&gt;CSS-Tricks guide for centering&lt;/a&gt;):&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.parent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;relative&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;/*
+  Element that should be centered
+*/&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.child&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;absolute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-100px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Half of the element&#39;s height */&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-100px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;/* Half of the element&#39;s width */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;ZQEjjp&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/ZQEjjp&quot;&gt;Centering an element: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+  &lt;figcaption&gt;Centering an element of known width and height&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Implementing design with overlapping elements. This is quite popular use case and negative margin allows you to achieve this effect without breaking the document flow.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;QyWVKK&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/QyWVKK&quot;&gt;Overlapping elements with negative margin: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+	&lt;figcaption&gt;Layout with overlapping elements&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Creating full-width elements within padded containers:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.parent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.5rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;/*
+  Element that should have full width
+*/&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.child&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-1.5rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-1.5rem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;470&quot; data-type=&quot;result&quot; data-href=&quot;LGYJQa&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/LGYJQa&quot;&gt;Full width container: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+	&lt;figcaption&gt;Making element fill up whole width of a container with padding applied&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“Clearing” the leftmost and rightmost gutter padding in grid systems. Take a look at an example from Bootstrap:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;row&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;col-sm-6&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;col-sm-6&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.row&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-15px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;margin-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-15px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.col-sm-6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding-right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I think there are just a few examples of “non-hacky” uses of negative margin. If you encountered any other, share it in comments!&lt;/p&gt;
+
+&lt;h2 id=&quot;why-we-dont-have-negative-padding-then&quot;&gt;Why we don’t have negative padding then?&lt;/h2&gt;
+
+&lt;p&gt;The word &lt;a href=&quot;http://www.collinsdictionary.com/dictionary/american/padding&quot;&gt;“padding”&lt;/a&gt; refers to something inner. That’s because the idea of negative padding may appear counterintuitive. Element with negative padding would be like something with an inside-out lining.&lt;/p&gt;
+
+&lt;p&gt;Imagine that setting negative padding values is possible. When padding value is set to zero, the border edge is the same as the content edge. When we set it negative, then border will overlap the content. Maybe that would be useful but, hey, content extended beyond its boundaries? That would make calculations of the element dimensions and position on the page definitely troublesome.&lt;/p&gt;
+
+&lt;h3 id=&quot;hypothetical-behavior-of-negative-padding&quot;&gt;Hypothetical behavior of negative padding&lt;/h3&gt;
+
+&lt;p&gt;Let’s have a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;p&amp;gt;&lt;/code&gt; element with some text content, padding and border:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;example&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Lorem ipsum dolor sit amet.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.example&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is how it renders in the browser:&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;pre class=&quot;codepen&quot; data-height=&quot;150&quot; data-type=&quot;result&quot; data-href=&quot;yeLxjP&quot; data-user=&quot;sztyborek&quot; data-safe=&quot;true&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;a href=&quot;http://codepen.io/sztyborek/pen/yeLxjP&quot;&gt;Negative padding example: check it out on Codepen&lt;/a&gt;&lt;/pre&gt;
+  &lt;script async=&quot;&quot; src=&quot;http://codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;For this example purposes, let’s assume that it’s possible to set the negative padding for an element:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.example&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-8px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then the element would probably be rendered like that:&lt;/p&gt;
+
+&lt;figure&gt;
+  &lt;img src=&quot;/img/negative-padding/negative.png&quot; alt=&quot;Element with negative top padding value&quot; /&gt;
+  &lt;figcaption&gt;Element with negative top padding value&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The element’s bottom would probably be “cut out” by the bottom border. Let’s go further with our thought experiment and set to negative value also the top padding:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.example&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-8px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;img src=&quot;/img/negative-padding/negative2.png&quot; alt=&quot;Element with negative top padding value both on top and the bottom&quot; /&gt;
+  &lt;figcaption&gt;Element with negative top padding value both on top and the bottom&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;When the element is rendered, it’s essential for the browser to know the exact dimensions of its content. In this case we can assume that the &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; still has the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;16px&lt;/code&gt; (the font size). But at the same time we see how negative padding would influence the element’s position. When content extends its boundaries (the border), the space occupied by the content overlaps the margin space!&lt;/p&gt;
+
+&lt;p&gt;These all above are just my speculations. I’m not really sure if that was the reason for making negative padding invalid. If you stumbled upon any reliable resource that explains the decision behind allowing negative margin and disallowing negative padding, feel free to share it in the comments!&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;p&gt;Online resources that I was referring to while writing this article:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.w3.org/TR/CSS21/box.html&quot;&gt;W3C specification for box model&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.w3.org/TR/CSS21/visuren.html&quot;&gt;W3C specification for visual formatting model&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model&quot;&gt;MDN article about box model&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sitepoint.com/understanding-block-formatting-contexts-in-css/&quot;&gt;Article about Block Formatting Contexts on Sitepoint&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements&quot;&gt;MDN article about determining elements dimensions&lt;/a&gt; and &lt;a href=&quot;https://msdn.microsoft.com/en-us/library/hh781509(VS.85).aspx&quot;&gt;resources from MSDN on the same topic&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.html5rocks.com/en/tutorials/internals/howbrowserswork/&quot;&gt;How browsers work explained on HTML5Rocks&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Community feedback on stackoverflow about &lt;a href=&quot;http://stackoverflow.com/questions/11495200/how-do-negative-margins-in-css-work-and-why-is-margin-top-5-margin-bottom5&quot;&gt;negative margin&lt;/a&gt; and &lt;a href=&quot;http://stackoverflow.com/questions/4973988/why-does-css-not-support-negative-padding&quot;&gt;negative padding&lt;/a&gt; was also very helpful.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thank you for reading!&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 06 Dec 2015 15:00:00 +0100</pubDate>
+        
+          <link>http://martasztybor.pl/css/2015/12/06/negative-padding-unboxing-the-box-model/</link>
+        
+        
+          <guid isPermaLink="true">http://martasztybor.pl/css/2015/12/06/negative-padding-unboxing-the-box-model/</guid>
+        
+      </item>
+    
+      <item>
+        <title>Why You Misuse Bootstrap and Why You Should Stop Doing This</title>
+        
+          <description>When starting a new project, there is always a need to find an appropriate way to scaffold the front-end, which usually means choosing the framework. In my opinion, a common mistake is to use Twitter Bootstrap as a base for almost every project. Why?</description>
+        
+        <pubDate>Thu, 10 Sep 2015 03:00:00 +0200</pubDate>
+        
+          <link>http://10clouds.com/blog/why-you-misuse-bootstrap-and-why-you-should-stop-doing-this/</link>
+        
+        
+          <guid isPermaLink="true">http://10clouds.com/blog/why-you-misuse-bootstrap-and-why-you-should-stop-doing-this/</guid>
+        
+      </item>
+    
+      <item>
+        <title>6 Steps to Make your CSS Code More Maintainable</title>
+        
+          <description>CSS is a fairly simple language to learn on a basic level and to kick off with the coding. But when your stylesheets start to grow, it becomes more and more difficult to untangle messed up classes. Here I collected a couple of tips to help you write more manageable code. They’ll be useful no matter if you’re working on a project’s styles on your own or in a team.</description>
+        
+        <pubDate>Tue, 21 Apr 2015 03:00:00 +0200</pubDate>
+        
+          <link>http://10clouds.com/blog/6-steps-to-make-your-css-code-more-maintainable/</link>
+        
+        
+          <guid isPermaLink="true">http://10clouds.com/blog/6-steps-to-make-your-css-code-more-maintainable/</guid>
+        
+      </item>
+    
+  </channel>
+</rss>
