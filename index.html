@@ -3,80 +3,9 @@ layout: default
 ---
 
 <header class="site-section flex-container">
-  <h1>I am a software developer who loves learning and teaching others</h1>
-  <ul class="list-unstyled social-media">
-    <li>
-      <a href="https://github.com/sztyborek" title="GitHub">
-        <span class="fa fa-github"></span>
-      </a>
-    </li>
-    <li>
-      <a href="https://twitter.com/sztyborek" title="Twitter">
-        <span class="fa fa-twitter"></span>
-      </a>
-    </li>
-    <li>
-      <a href="https://www.linkedin.com/in/marta-sztybor-030a2890/">
-        <span class="fa fa-linkedin"></span>
-      </a>
-    </li>
-    <li>
-      <a href="https://codepen.io/sztyborek/">
-        <span class="fa fa-codepen"></span>
-      </a>
-    </li>
-  </ul>
+  <h1 class="text-center">I am a <a href="https://www.linkedin.com/in/marta-sztybor-030a2890/">software developer</a>, <a href="https://pisze.martasztybor.pl">writer</a> and a&nbsp;psychologist-to-be.</h1>
+  <h2 class="text-center"><a href="/tech-blog/">See posts on my tech blog</a></h2>
 </header>
-
-<div class="site-section flex-container flex-container--row">
-  <section class="flex-container flex-item--half">
-    <h2>Writing</h2>
-    <ul class="list-unstyled">
-      {% for post in site.posts %}
-        <li>
-          {% if post.external_page_link %}
-            <a href="{{ post.external_page_link }}">{{ post.title }}</a>
-          {% else %}
-            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  </section>
-  <section class="flex-container flex-item--half">
-    <h2>Speaking</h2>
-    <ul class="list-unstyled">
-      <li>
-        <a href="http://slides.com/martasztybor/front-end-dev#/" class="post-link">
-          Frontend developer's career [PL]
-        </a>
-      </li>
-      <li>
-        <a href="http://pywaw.org/58/" class="post-link">
-          CSS for backend developers [PL]
-        </a>
-      </li>
-      <li>
-        <a href="https://www.youtube.com/watch?v=RpabiRAgBLw" class="post-link">
-          Introduction to object oriented CSS [PL]
-        </a>
-      </li>
-    </ul>
-  </section>
-</div>
-
-<div class="site-section flex-container flex-container--row">
-  <section class="flex-container flex-item--half">
-    <h2>I co-organized HTML and CSS workshops for beginners</h2>
-    <a href="https://theawwwesomes.org">The Awwwesomes HTML &amp; CSS workshops</a>
-  </section>
-  <section class="flex-container flex-item--half">
-    <h2>I co-authored an introductory book about creating websites</h2>
-    <a href="https://the-awwwesomes.gitbooks.io/html-css-step-by-step/content/pl/">
-      The Awwwesomes HTML &amp; CSS tutorial [PL]
-    </a>
-  </section>
-</div>
 
 
 
