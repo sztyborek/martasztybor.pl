@@ -1,0 +1,39 @@
+---
+layout: default
+title: Tech blog
+permalink: /tech-blog/
+---
+
+<h1>Tech blog</h1>
+
+<div class="site-section flex-container flex-container--row">
+    <section class="flex-container flex-item--half">
+      <h2>Writing</h2>
+      <ul class="list-unstyled">
+        {% for post in site.posts %}
+          <li>
+            {% if post.external_page_link %}
+              <a href="{{ post.external_page_link }}">{{ post.title }}</a>
+            {% else %}
+              <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="flex-container flex-item--half">
+      <h2>Speaking</h2>
+      <ul class="list-unstyled">
+        <li>
+          <a href="http://pywaw.org/58/" class="post-link">
+            CSS for backend developers [PL]
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=RpabiRAgBLw" class="post-link">
+            Introduction to object oriented CSS [PL]
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
